@@ -9,7 +9,7 @@ class Product(object):
 
 def main():
    #todo actually solve the problem eventually
-   with open('test.json', 'r') as jsonData: 
+   with open('products.json', 'r') as jsonData: 
       for line in jsonData:
          line = line.rstrip("\r\n")
          print(line)
