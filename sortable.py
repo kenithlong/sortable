@@ -7,17 +7,35 @@ class Product(object):
       self.model = model
 
 
-def main():
-   #todo actually solve the problem eventually
-   with open('products.json', 'r') as jsonData: 
+def buildProductMap(productFile):
+   """
+   Read in the product file and create a mapping
+   based on the manufacturer. Potentially dangerous
+   assumption of converting to lower, case could
+   be important, also assuming products fit in 
+   memory...
+
+   returns {"manufacturer" : listOfProducts}   
+   """
+   productMap = {}
+   with open(productFile, 'r') as jsonData: 
       for line in jsonData:
          line = line.rstrip("\r\n")
-         print(json.loads(line))
-         # try: man = line["manufacture"] 
-         #if man in bigDictionary
-         # append to the thinger?
+         singleEntry = json.loads(line)
+         #to lower to avoid collisions
+         currentManufacturer = singleEntry["manufacturer"].lower()
+         if (currentManufacturer not in productMap):
+            productMap[currentManufacturer] = [singleEntry]
+         else:
+            productMap[currentManufacturer].append(singleEntry)
 
-   #seems to lend itself to a dictionary, key == manufacture, value list of products
+   return productMap
+
+
+def main():
+   print(buildProductMap("products.json"))
+
+
 
 if __name__ == "__main__":
    main()
