@@ -12,8 +12,12 @@ def main():
    with open('products.json', 'r') as jsonData: 
       for line in jsonData:
          line = line.rstrip("\r\n")
-         print(line)
          print(json.loads(line))
+         # try: man = line["manufacture"] 
+         #if man in bigDictionary
+         # append to the thinger?
+
+   #seems to lend itself to a dictionary, key == manufacture, value list of products
 
 if __name__ == "__main__":
    main()
